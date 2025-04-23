@@ -1,25 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Times vs </title>
-    <link rel="stylesheet" href="/Q3/ex3.css">
+  <meta charset="UTF-8">
+  <title>Chaveamento de Clubes</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+    input, button {
+      padding: 5px;
+      margin: 5px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
-        <h1>Jogos Eliminatórios</h1>
 
-            <label for="clubes">Clube:</label>
-            <input type="text" id="input" placeholder="Adicione seu time">
-            <button id="adicionarTime">Adicionar</button>
- 
-            <ul id="times"></ul>
-        
-            <button id="botaoMostrar">Monstrar Tabela dos Jogos</button>
-            <button id="botaoListar">Listar Clubes</button>
-            
-            <div id="vs"></div>
+  <h2>Clubes</h2>
+  <input type="text" id="clube" placeholder="Nome do clube">
+  <button onclick="adicionarClube()">Adicionar Clube</button>
+  <br>
+  <button onclick="listarClubes()">Listar Clubes</button>
+  <button onclick="fazerChaveamento()">Chaveamento</button>
 
-    <script src="ex3.js"></script>
+  <ul id="lista"></ul>
+
+  <script>
+    const clubes = [];
+
+    function adicionarClube() {
+      const nome = document.getElementById("clube").value.trim();
+      if (nome !== "") {
+        clubes.push(nome);
+        document.getElementById("clube").value = "";
+        alert("Clube adicionado!");
+      }
+    }
+
+    function listarClubes() {
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+      clubes.forEach((clube, i) => {
+        const li = document.createElement("li");
+        li.textContent = `${i + 1}. ${clube}`;
+        lista.appendChild(li);
+      });
+    }
+
+    function fazerChaveamento() {
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+
+      if (clubes.length % 2 !== 0) {
+        alert("Número de clubes ímpar. Adicione mais um clube.");
+        return;
+      }
+
+      for (let i = 0; i < clubes.length / 2; i++) {
+        const li = document.createElement("li");
+        li.textContent = `${clubes[i]} vs ${clubes[clubes.length - 1 - i]}`;
+        lista.appendChild(li);
+      }
+    }
+  </script>
+
 </body>
 </html>
