@@ -1,28 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="ex1.css">
+  <meta charset="UTF-8">
+  <title>Lista de Tarefas</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px;
+    }
+    .feito {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
 </head>
 <body>
-    <h1>Lista de tarefas</h1>
 
-    <form name="formulario">
-    <label for="task">Tarefa: </label> 
-    <input type="text" name="task" id="task"/> 
-    <button type="button" onclick="add()">Adicionar Tarefa</button>
-    </form>
+  <h2>Lista de Tarefas</h2>
+  <input type="text" id="tarefa" placeholder="Digite a tarefa">
+  <button onclick="adicionar()">Adicionar</button>
+  <button onclick="limparTudo()">Limpar Tudo</button>
+  <p>Tarefas pendentes: <span id="contador">0</span></p>
 
-    <fieldset>
-    <legend>Tarefas:</legend>
-    <ul>
-        <li>Limpar casa</li>
-        <li>Outras</li>
-    </ul>
-    </fieldset>
-    <script src="ex1.js"></script>
+  <ul id="lista"></ul>
+
+  <script>
+    function atualizarContador() {
+      let tarefas = document.querySelectorAll("#lista li span");
+      let pendentes = 0;
+      tarefas.forEach(t => {
+        if (!t.classList.contains("feito")) pendentes++;
+      });
+      document.getElementById("contador").textContent = pendentes;
+    }
+
+    function adicionar() {
+      let input = document.getElementById("tarefa");
+      let texto = input.value.trim();
+      if (texto === "") return;
+
+      let li = document.createElement("li");
+      let span = document.createElement("span");
+      span.textContent = texto;
+
+      let botaoFeito = document.createElement("button");
+      botaoFeito.textContent = "Concluir";
+      botaoFeito.onclick = function () {
+        span.classList.toggle("feito");
+        atualizarContador();
+      };
+
+      let botaoEditar = document.createElement("button");
+      botaoEditar.textContent = "Editar";
+      botaoEditar.onclick = function () {
+        let novoTexto = prompt("Editar tarefa:", span.textContent);
+        if (novoTexto) span.textContent = novoTexto;
+      };
+
+      let botaoRemover = document.createElement("button");
+      botaoRemover.textContent = "Remover";
+      botaoRemover.onclick = function () {
+        li.remove();
+        atualizarContador();
+      };
+
+      li.appendChild(span);
+      li.appendChild(botaoFeito);
+      li.appendChild(botaoEditar);
+      li.appendChild(botaoRemover);
+
+      document.getElementById("lista").appendChild(li);
+      input.value = "";
+      atualizarContador();
+    }
+
+    function limparTudo() {
+      document.getElementById("lista").innerHTML = "";
+      atualizarContador();
+    }
+  </script>
+
 </body>
 </html>
-
