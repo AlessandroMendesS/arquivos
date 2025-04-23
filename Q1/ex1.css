@@ -1,0 +1,8 @@
+* {
+    padding: 0;
+    box-sizing: 0;
+}
+
+.checked {
+    text-decoration: line-through;
+  }
