@@ -1,0 +1,29 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 30px;
+  }
+  input, button {
+    margin: 5px;
+    padding: 5px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  h2 {
+    text-decoration: underline;
+  }
+  #botao {
+    background-color: rgb(7, 106, 255);
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 100px;
+    color: white;
+  }
+  #container {
+    border: 1px solid black;
+    width: 100vw;
+    height: 34vh;
+  
+  }

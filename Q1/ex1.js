@@ -1,29 +1,51 @@
-function add() {
-    let li = document.createElement('LI');
-    let input_value = document.formulario.task.value;
-    let input_text = document.createTextNode(input_value);
-  
-    li.appendChild(input_text);
-    document.querySelector('ul').appendChild(li);
-    document.formulario.task.value = "";
-  
-    createCloseButton(li);
-  }
 
-  function createCloseButton(li) {
-    let span = document.createElement("SPAN");
-    let txt = document.createTextNode("\u00D7"); // x para excluior a tarefaaaaaaaa
+  function adicionar() {
+    let input = document.getElementById("tarefa");
+    let texto = input.value;
+
   
-    span.className = "close";
-    span.appendChild(txt);
+    if (texto === "") return;
+
+    let li = document.createElement("li");
+    let span = document.createElement("span");
+    span.textContent = texto;
+
+    let botaoFeito = document.createElement("button");
+    botaoFeito.textContent = "Concluir";
+    botaoFeito.style.color = '#000'
+    botaoFeito.onclick = function () {
+      span.classList.toggle("feito"); // faz o traço para conclusão da tarefaaaa, finalmente 
+     
+    };
+
+    let botaoEditar = document.createElement("button");
+    botaoEditar.textContent = "Editar";
+    botaoEditar.style.backgroundColor = 'yellow'
+    botaoEditar.style.color = '#000'
+    botaoEditar.onclick = function () {
+      let novoTexto = prompt("Editar tarefa:", span.textContent);
+      if (novoTexto) span.textContent = novoTexto;
+    };
+
+    let botaoRemover = document.createElement("button");
+    botaoRemover.textContent = "Remover";
+    botaoRemover.style.backgroundColor = 'red'
+    botaoRemover.style.color = '#000'
+    botaoRemover.onclick = function () {
+      li.remove();
+     
+    };
+
     li.appendChild(span);
-  
-    span.onclick = () => span.parentElement.style.display = "none";
+    li.appendChild(botaoFeito);
+    li.appendChild(botaoEditar);
+    li.appendChild(botaoRemover);
+
+    document.getElementById("lista").appendChild(li);
+    input.value = "";
+   
   }
 
-    document.querySelectorAll('li').forEach(createCloseButton);
-
-    document.querySelector('ul').addEventListener('click', (e) => {
-    if (e.target.tagName === 'LI')
-        e.target.classList.toggle('checked');
-    });
+  function limparTudo() {
+    document.getElementById("lista").innerHTML = "";
+  }

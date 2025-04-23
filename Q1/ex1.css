@@ -1,8 +1,36 @@
-* {
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  ul {
+    list-style: none;
     padding: 0;
-    box-sizing: 0;
-}
-
-.checked {
+  }
+  li {
+    margin: 10px;
+  }
+  .feito {
     text-decoration: line-through;
+    color: gray;
+  }
+  button {
+    color: white;
+    background-color: #15c91b;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+  
+  }
+  #limpo {
+    background-color: red;
+  }
+  #tarefa {
+    border: 1px solid black;
   }

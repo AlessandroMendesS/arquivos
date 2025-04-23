@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="ex2.js">
-    <title>prod</title>
+  <meta charset="UTF-8">
+  <title>Controle de Peças</title>
+    <link rel="stylesheet" href="ex2.css">
 </head>
 <body>
-    <h1>Controle de Produção - Turno A</h1>
-    
-    <div>
+    <div id="container">
+        <h2>Controle de Produção - Turno A</h2>
+        <p>Cadastre a produção dos operadores de máquinas</p>
 
         <input type="text" id="operador" placeholder="Nome do operador">
-        <input type="number" id="qtd" placeholder="Qtd de Peças Produzidas">
-        
-        <button onclick="adicionarRegistro()">Adicionar</button>
-        <button onclick="limparTodosRegistros()">Limpar Tudo</button>
+        <input type="number" id="pecas" placeholder="Qtd de peças">
+        <button id="botao" onclick="adicionar()">Adicionar</button>
+
+        <p>Total de peças: <span id="total">0</span></p>
+
+        <ul id="lista"></ul>
     </div>
-    
+  <script src="ex2.js"></script>
 
-    
-    <div id="totalProducao">Produção Total: 0 peças</div>
-
-    <script src="ex2.js"></script>
 </body>
 </html>

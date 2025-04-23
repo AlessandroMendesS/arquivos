@@ -3,90 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Lista de Tarefas</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      margin-top: 30px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 10px;
-    }
-    .feito {
-      text-decoration: line-through;
-      color: gray;
-    }
-  </style>
+  <link rel="stylesheet" href="ex1.css">
 </head>
 <body>
-
+    <div id="container">
   <h2>Lista de Tarefas</h2>
+  <p>Adicione, conclua e remova tarefas do seu dia a dia.</p>
   <input type="text" id="tarefa" placeholder="Digite a tarefa">
   <button onclick="adicionar()">Adicionar</button>
-  <button onclick="limparTudo()">Limpar Tudo</button>
-  <p>Tarefas pendentes: <span id="contador">0</span></p>
+  <button id="limpo" onclick="limparTudo() ">Limpar Tudo</button>
 
   <ul id="lista"></ul>
+  </div>
 
-  <script>
-    function atualizarContador() {
-      let tarefas = document.querySelectorAll("#lista li span");
-      let pendentes = 0;
-      tarefas.forEach(t => {
-        if (!t.classList.contains("feito")) pendentes++;
-      });
-      document.getElementById("contador").textContent = pendentes;
-    }
-
-    function adicionar() {
-      let input = document.getElementById("tarefa");
-      let texto = input.value.trim();
-      if (texto === "") return;
-
-      let li = document.createElement("li");
-      let span = document.createElement("span");
-      span.textContent = texto;
-
-      let botaoFeito = document.createElement("button");
-      botaoFeito.textContent = "Concluir";
-      botaoFeito.onclick = function () {
-        span.classList.toggle("feito");
-        atualizarContador();
-      };
-
-      let botaoEditar = document.createElement("button");
-      botaoEditar.textContent = "Editar";
-      botaoEditar.onclick = function () {
-        let novoTexto = prompt("Editar tarefa:", span.textContent);
-        if (novoTexto) span.textContent = novoTexto;
-      };
-
-      let botaoRemover = document.createElement("button");
-      botaoRemover.textContent = "Remover";
-      botaoRemover.onclick = function () {
-        li.remove();
-        atualizarContador();
-      };
-
-      li.appendChild(span);
-      li.appendChild(botaoFeito);
-      li.appendChild(botaoEditar);
-      li.appendChild(botaoRemover);
-
-      document.getElementById("lista").appendChild(li);
-      input.value = "";
-      atualizarContador();
-    }
-
-    function limparTudo() {
-      document.getElementById("lista").innerHTML = "";
-      atualizarContador();
-    }
-  </script>
-
+  <script src="ex1.js"></script>
 </body>
 </html>
