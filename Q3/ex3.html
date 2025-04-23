@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Chaveamento de Clubes</title>
+  <title>Controle de Peças</title>
   <style>
     body {
       font-family: sans-serif;
@@ -10,8 +10,8 @@
       margin-top: 30px;
     }
     input, button {
-      padding: 5px;
       margin: 5px;
+      padding: 5px;
     }
     ul {
       list-style: none;
@@ -21,51 +21,48 @@
 </head>
 <body>
 
-  <h2>Clubes</h2>
-  <input type="text" id="clube" placeholder="Nome do clube">
-  <button onclick="adicionarClube()">Adicionar Clube</button>
-  <br>
-  <button onclick="listarClubes()">Listar Clubes</button>
-  <button onclick="fazerChaveamento()">Chaveamento</button>
+  <h2>Controle de Peças</h2>
+
+  <input type="text" id="operador" placeholder="Nome do operador">
+  <input type="number" id="pecas" placeholder="Qtd de peças">
+  <button onclick="adicionar()">Adicionar</button>
+
+  <p>Total de peças: <span id="total">0</span></p>
 
   <ul id="lista"></ul>
 
   <script>
-    const clubes = [];
+    let total = 0;
 
-    function adicionarClube() {
-      const nome = document.getElementById("clube").value.trim();
-      if (nome !== "") {
-        clubes.push(nome);
-        document.getElementById("clube").value = "";
-        alert("Clube adicionado!");
-      }
+    function atualizarTotal() {
+      document.getElementById("total").textContent = total;
     }
 
-    function listarClubes() {
-      const lista = document.getElementById("lista");
-      lista.innerHTML = "";
-      clubes.forEach((clube, i) => {
-        const li = document.createElement("li");
-        li.textContent = `${i + 1}. ${clube}`;
-        lista.appendChild(li);
-      });
-    }
+    function adicionar() {
+      const nome = document.getElementById("operador").value.trim();
+      const qtd = parseInt(document.getElementById("pecas").value);
 
-    function fazerChaveamento() {
-      const lista = document.getElementById("lista");
-      lista.innerHTML = "";
+      if (nome === "" || isNaN(qtd)) return;
 
-      if (clubes.length % 2 !== 0) {
-        alert("Número de clubes ímpar. Adicione mais um clube.");
-        return;
-      }
+      const li = document.createElement("li");
+      li.textContent = `${nome} - ${qtd} peças `;
 
-      for (let i = 0; i < clubes.length / 2; i++) {
-        const li = document.createElement("li");
-        li.textContent = `${clubes[i]} vs ${clubes[clubes.length - 1 - i]}`;
-        lista.appendChild(li);
-      }
+      const btnExcluir = document.createElement("button");
+      btnExcluir.textContent = "Excluir";
+      btnExcluir.onclick = function () {
+        li.remove();
+        total -= qtd;
+        atualizarTotal();
+      };
+
+      li.appendChild(btnExcluir);
+      document.getElementById("lista").appendChild(li);
+
+      total += qtd;
+      atualizarTotal();
+
+      document.getElementById("operador").value = "";
+      document.getElementById("pecas").value = "";
     }
   </script>
 
